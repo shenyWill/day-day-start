@@ -21,4 +21,4 @@ ES6 Module的特点：
  ES6 模块依赖是确定的，和运行时的状态无关，因此可以进行静态分析，这就是Tree-Shaking的基础。
 
 
- 说明文档： [url](https://juejin.cn/post/7169004126469914654)
+ 说明文档： [tree-shaking](https://juejin.cn/post/7169004126469914654)
