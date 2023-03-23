@@ -1,0 +1,66 @@
+<div class="scroll-container">
+  <div class="scroll-content">
+    <ul class="item-list">
+      <!-- 这里是动态生成的大量列表项 -->
+    </ul>
+  </div>
+</div>
+<style>
+.scroll-container {
+  height: 300px;
+  overflow-y: scroll;
+}
+
+.scroll-content {
+  height: auto;
+}
+
+.item-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  height: 50px;
+  line-height: 50px;
+  border-bottom: 1px solid #ccc;
+}
+</style>
+
+<script>
+  // 获取相关元素
+  const scrollContainer = document.querySelector('.scroll-container');
+  const scrollContent = document.querySelector('.scroll-content');
+  const itemList = document.querySelector('.item-list');
+
+  // 计算列表项总高度
+  let totalHeight = 0;
+  for (let i = 0; i < 1000; i++) {
+    const item = document.createElement('li');
+    item.classList.add('item');
+    item.textContent = `第${i + 1}个列表项`;
+    itemList.appendChild(item);
+    totalHeight += item.offsetHeight;
+  }
+
+  // 设置容器高度
+  scrollContent.style.height = `${totalHeight}px`;
+
+  // 定义 Intersection Observer 实例
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // 进入视野，添加真实节点
+        const item = entry.target.cloneNode(true);
+        itemList.appendChild(item);
+        observer.unobserve(entry.target);
+      }
+    });
+  });
+
+  // 初始化，添加初始节点
+  itemList.querySelectorAll('li').forEach(item => {
+    observer.observe(item);
+  });
+</script>
