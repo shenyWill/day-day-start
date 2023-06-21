@@ -1,0 +1,11 @@
+{
+  "key": "keywords",
+  "name": "example",
+  "version": "0.0.1",
+  "description": "项目描述",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "yuanwill",
+  "license": "ISC"
+}
