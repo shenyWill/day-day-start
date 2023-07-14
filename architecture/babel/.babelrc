@@ -3,7 +3,9 @@
     ["@babel/preset-env", {
       "targets": {
         "browsers": ["last 2 versions", "ie >= 11"]
-      }
+      },
+      "corejs": "3",
+      "useBuiltIns": "usage"
     }]
   ],
   "plugins": ["@babel/plugin-proposal-class-properties", "@babel/plugin-transform-arrow-functions", "./plugins/format-var.js"]
