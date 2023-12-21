@@ -1,20 +1,16 @@
-var merge = function(nums1, m, nums2, n) {
-    // 两个指针
-    let i = 0,j = 0;
-    while(i <= m) {
-        if (nums1[i] < nums2[j] && nums1[i] !== 0) {
-            i++;
+var removeElement = function (nums, val) {
+    let distance = 0;
+    let i = 0;
+    while (i < nums.length) {
+        if (nums[i] === val) {
+            nums.splice(i, 1);
+            distance++;
         } else {
-            nums1.splice(i, 0, nums2[j]);
-            nums1.length--;
-            j++;
             i++;
-            
         }
     }
-    console.log(nums1);
+    console.log(nums);
+    return distance;
 };
 
-merge([1,2,3,0,0,0], 3, [2,4,5], 3);
-
-console.log(123);
+console.log(removeElement([0, 1, 2, 2, 3, 0, 4, 2], 2));
