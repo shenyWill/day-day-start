@@ -3,30 +3,21 @@ import logo from './logo.svg';
 import './App.css';
 const countContext = createContext(111);
 
-function Aaa() {
-  const [count, setNum] = useState(0);
-  useEffect(() => {
-    setInterval(() => {
-      setNum(Math.random());
-    }, 2000);
-  }, []);
-  function BbbCallback () {
+interface AaaProps {
+  count: number;
+  content: React.ReactElement;
+}
 
-  }
+function Aaa(props: AaaProps) {
+  
   return <div>
-    <MemoBbb count={count} callback={BbbCallback}></MemoBbb>
+    <h3>{props.count}</h3>
+    {props.content}
   </div>
 }
 
-interface BbbProps {
-  count: number;
-  callback: Function;
+function App() {
+  return <Aaa count={3} content={<div>123</div>}></Aaa>
 }
 
-function Bbb(props: BbbProps) {
-  console.log('render Bbb...');
-  return <div>{props.count}</div>
-}
-
-const MemoBbb = memo(Bbb);
-export default Aaa;
+export default App;
