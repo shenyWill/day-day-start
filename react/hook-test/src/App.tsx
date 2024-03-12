@@ -2,25 +2,10 @@ import React, { createContext, memo, Reducer, useContext, useEffect, useImperati
 import logo from './logo.svg';
 import './App.css';
 import Calendar from './Calendar';
-
-interface AaaProps {
-  count: number;
-  content: React.ReactElement;
-}
-
-function Aaa(props: AaaProps) {
-  
-  return <div>
-    <h3>{props.count}</h3>
-    {props.content}
-  </div>
-}
-const onChange = (date: Date) => {
-  console.log(date);
-}
+import dayjs from 'dayjs';
 
 function App() {
-  return <Calendar value={new Date(2021,3,15)} onChange={onChange}></Calendar>
+  return <Calendar value={dayjs('2023-11-09')}></Calendar>
 }
 
 export default App;
