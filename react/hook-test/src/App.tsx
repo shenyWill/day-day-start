@@ -1,7 +1,7 @@
 import React, { createContext, memo, Reducer, useContext, useEffect, useImperativeHandle, useReducer, useRef, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
-const countContext = createContext(111);
+import Calendar from './Calendar';
 
 interface AaaProps {
   count: number;
@@ -15,9 +15,12 @@ function Aaa(props: AaaProps) {
     {props.content}
   </div>
 }
+const onChange = (date: Date) => {
+  console.log(date);
+}
 
 function App() {
-  return <Aaa count={3} content={<div>123</div>}></Aaa>
+  return <Calendar value={new Date(2021,3,15)} onChange={onChange}></Calendar>
 }
 
 export default App;
