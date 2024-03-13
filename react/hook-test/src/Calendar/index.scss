@@ -26,10 +26,13 @@
       &-cell {
         flex: 1;
         border: 1px solid #eee;
-        padding: 10px;
         color: #ccc;
+        overflow: hidden;
         &-current {
           color: #000;
+        }
+        &-date {
+          padding: 10px;
         }
       }
   
