@@ -10,14 +10,23 @@ import './App.css';
 // import Space from './components/Space';
 import './app.scss'
 
-import Portal from './components/Portal';
+// import Portal from './components/Portal';
+
+import MutateObserver from './components/MutateObserver';
 
 // const IconFont = createFromIconfont('//at.alicdn.com/t/c/font_4520108_xeag7mtm34a.js');
 
 function App() {
-  const content = <div className='btn'>
-    <button>按钮</button>
-  </div>
+  // const content = <div className='btn'>
+  //   <button>按钮</button>
+  // </div>
+  const [ className, setClassName] = useState('aaa');
+  useEffect(() => {
+    setTimeout(() => setClassName('bbb'), 2000);
+  }, []);
+  const callback = function (mutationsList: MutationRecord[]) {
+    console.log(mutationsList);
+  };
   return <div data-testid="test">
     {/* <IconAdd spin></IconAdd>
     <IconEmail></IconEmail>
@@ -29,7 +38,18 @@ function App() {
       <div className='box'>333</div>
     </Space> */}
 
-    <Portal attach={document.body}>{content}</Portal>
+    {/* <Portal attach={document.body}>{content}</Portal> */}
+     <MutateObserver onMutate={callback}>
+        <div id="container">
+          <div className={className}>
+            {
+              className === 'aaa' ? <div>aaa</div> : <div>
+                <p>bbb</p>
+              </div>
+            }
+          </div>
+        </div>
+      </MutateObserver>
   </div>
 }
 
