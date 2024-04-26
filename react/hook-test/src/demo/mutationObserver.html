@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #box {
+      width: 100px;
+      height: 100px;
+      background-color: aquamarine;
+    }
+  </style>
+</head>
+<body>
+  <div id="box">
+    <button>赵子龙</button>
+  </div>
+</body>
+<script>
+  setTimeout(() => {
+    box.style.background = 'red';
+  }, 2000);
+  setTimeout(() => {
+    const dom = document.createElement('button');
+    dom.textContent = '张翼德';
+    box.appendChild(dom);
+  }, 5000);
+  setTimeout(() => {
+    document.querySelectorAll('button')[0].remove();
+  }, 8000);
+
+  const mutationObserver = new MutationObserver(mountationList => {
+    console.log(mountationList);
+  });
+
+  mutationObserver.observe(box, {
+    attributes: true,
+    childList: true
+  });
+</script>
+</html>
