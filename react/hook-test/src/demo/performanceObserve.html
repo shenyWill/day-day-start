@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <img src="https://p9-passport.byteacctimg.com/img/user-avatar/4e9e751e2b32fb8afbbf559a296ccbf2~300x300.image" />
+  <button onclick="measureClick()">Measure</button>
+</body>
+<script>
+  const performanceObserver = new PerformanceObserver(list => {
+    list.getEntries().forEach(entry => {
+      console.log(entry)
+    })
+  });
+  performanceObserver.observe({entryTypes: ['resource', 'mark', 'measure']});
+  performance.mark('registered-observer');
+  function measureClick() {
+    performance.measure('button clicked');
+  }
+</script>
+</html>
