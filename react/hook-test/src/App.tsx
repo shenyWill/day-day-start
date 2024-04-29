@@ -12,21 +12,23 @@ import './app.scss'
 
 // import Portal from './components/Portal';
 
-import MutateObserver from './components/MutateObserver';
+// import MutateObserver from './components/MutateObserver';
 
 // const IconFont = createFromIconfont('//at.alicdn.com/t/c/font_4520108_xeag7mtm34a.js');
+
+import Position from './APITest/Position'
 
 function App() {
   // const content = <div className='btn'>
   //   <button>按钮</button>
   // </div>
-  const [ className, setClassName] = useState('aaa');
-  useEffect(() => {
-    setTimeout(() => setClassName('bbb'), 2000);
-  }, []);
-  const callback = function (mutationsList: MutationRecord[]) {
-    console.log(mutationsList);
-  };
+  // const [ className, setClassName] = useState('aaa');
+  // useEffect(() => {
+  //   setTimeout(() => setClassName('bbb'), 2000);
+  // }, []);
+  // const callback = function (mutationsList: MutationRecord[]) {
+  //   console.log(mutationsList);
+  // };
   return <div data-testid="test">
     {/* <IconAdd spin></IconAdd>
     <IconEmail></IconEmail>
@@ -39,7 +41,7 @@ function App() {
     </Space> */}
 
     {/* <Portal attach={document.body}>{content}</Portal> */}
-     <MutateObserver onMutate={callback}>
+     {/* <MutateObserver onMutate={callback}>
         <div id="container">
           <div className={className}>
             {
@@ -49,7 +51,8 @@ function App() {
             }
           </div>
         </div>
-      </MutateObserver>
+      </MutateObserver> */}
+      <Position></Position>
   </div>
 }
 
