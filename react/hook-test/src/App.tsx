@@ -16,7 +16,11 @@ import './app.scss'
 
 // const IconFont = createFromIconfont('//at.alicdn.com/t/c/font_4520108_xeag7mtm34a.js');
 
-import Position from './APITest/Position'
+// import Position from './APITest/Position'
+
+// import UseMountedState from './APITest/UseMountedStateTest';
+
+import UseCookieTest from './APITest/UseCookieTest';
 
 function App() {
   // const content = <div className='btn'>
@@ -52,7 +56,9 @@ function App() {
           </div>
         </div>
       </MutateObserver> */}
-      <Position></Position>
+      {/* <Position></Position> */}
+      {/* <UseMountedState></UseMountedState> */}
+      <UseCookieTest></UseCookieTest>
   </div>
 }
 
