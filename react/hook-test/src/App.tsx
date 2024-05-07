@@ -24,7 +24,11 @@ import './app.scss'
 
 // import UseHoverTest from './APITest/UseHoverTest';
 
-import UseScrollingTest from './APITest/UseScrollingTest';
+// import UseScrollingTest from './APITest/UseScrollingTest';
+
+// import UseSizeTest from './APITest/UseSizeTest'
+
+import UseHoverTestTwo from './APITest/UseHoverTestTwo';
 
 function App() {
   // const content = <div className='btn'>
@@ -64,7 +68,9 @@ function App() {
       {/* <UseMountedState></UseMountedState> */}
       {/* <UseCookieTest></UseCookieTest> */}
       {/* <UseHoverTest></UseHoverTest> */}
-      <UseScrollingTest></UseScrollingTest>
+      {/* <UseScrollingTest></UseScrollingTest> */}
+      {/* <UseSizeTest></UseSizeTest> */}
+      <UseHoverTestTwo></UseHoverTestTwo>
   </div>
 }
 
