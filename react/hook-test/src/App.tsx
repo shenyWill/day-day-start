@@ -20,7 +20,11 @@ import './app.scss'
 
 // import UseMountedState from './APITest/UseMountedStateTest';
 
-import UseCookieTest from './APITest/UseCookieTest';
+// import UseCookieTest from './APITest/UseCookieTest';
+
+// import UseHoverTest from './APITest/UseHoverTest';
+
+import UseScrollingTest from './APITest/UseScrollingTest';
 
 function App() {
   // const content = <div className='btn'>
@@ -58,7 +62,9 @@ function App() {
       </MutateObserver> */}
       {/* <Position></Position> */}
       {/* <UseMountedState></UseMountedState> */}
-      <UseCookieTest></UseCookieTest>
+      {/* <UseCookieTest></UseCookieTest> */}
+      {/* <UseHoverTest></UseHoverTest> */}
+      <UseScrollingTest></UseScrollingTest>
   </div>
 }
 
