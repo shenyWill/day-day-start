@@ -30,7 +30,10 @@ import './app.scss'
 
 import UseHoverTestTwo from './APITest/UseHoverTestTwo';
 
+import UseWhyDidYouUpdateTest from './APITest/UseWhyDidYouUpdateTest';
+
 function App() {
+  const [count, setCount] = useState(1);
   // const content = <div className='btn'>
   //   <button>按钮</button>
   // </div>
@@ -70,7 +73,10 @@ function App() {
       {/* <UseHoverTest></UseHoverTest> */}
       {/* <UseScrollingTest></UseScrollingTest> */}
       {/* <UseSizeTest></UseSizeTest> */}
-      <UseHoverTestTwo></UseHoverTestTwo>
+      {/* <UseHoverTestTwo></UseHoverTestTwo> */}
+      <UseWhyDidYouUpdateTest count={count}></UseWhyDidYouUpdateTest>
+      <button onClick={() => setCount(count + 1)}>+</button>
+      <button onClick={() => setCount(count - 1)}>-</button>
   </div>
 }
 
