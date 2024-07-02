@@ -62,8 +62,10 @@
     "@storybook/react": "^8.0.0",
     "@storybook/react-webpack5": "^8.0.0",
     "@storybook/test": "^8.0.0",
+    "@types/react-lazyload": "^3.2.3",
     "eslint-plugin-storybook": "^0.8.0",
     "prop-types": "^15.8.1",
+    "react-lazyload": "^3.2.1",
     "storybook": "^8.0.0",
     "webpack": "^5.90.3"
   }
