@@ -1,51 +1,18 @@
-import img1 from './assets/images/1.png';
-import img2 from './assets/images/2.jpeg';
-// import LazyLoad from 'react-lazyload';
-import LazyLoad from './components/Lazy/LazyLoad';
-import React from 'react';
+import './App.css';
 
-const LazyYuan = React.lazy(() => import('./components/Lazy/Yuan'));
 export default function App() {
   return (
     <div>
-      <p>xxxxxx</p>
-      <p>xxxxxx</p>
-      <p>xxxxxx</p>
-      <p>xxxxxx</p>
-      <p>xxxxxx</p>
-      <p>xxxxxx</p>
-      <p>xxxxxx</p>
-      <p>xxxxxx</p>
-      <p>xxxxxx</p>
-      <p>xxxxxx</p>
-      <p>xxxxxx</p>
-      <p>xxxxxx</p>
-      <p>xxxxxx</p>
-      <p>xxxxxx</p>
-      <p>xxxxxx</p>
-      <p>xxxxxx</p>
-      <p>xxxxxx</p>
-      <p>xxxxxx</p>
-      <p>xxxxxx</p>
-      <p>xxxxxx</p>
-      <p>xxxxxx</p>
-      <p>xxxxxx</p>
-      <p>xxxxxx</p>
-      <p>xxxxxx</p>
-      <p>xxxxxx</p>
-      <p>xxxxxx</p>
-      <p>xxxxxx</p>
-      <p>xxxxxx</p>
-      <p>xxxxxx</p>
-      <LazyLoad placeholder={<div>loading...</div>}>
-        <LazyYuan></LazyYuan>
-      </LazyLoad>
-      <LazyLoad placeholder={<div>loading...</div>}>
-        <img src={img1}/>
-      </LazyLoad>
-      <LazyLoad placeholder={<div>loading...</div>}>
-        <img src={img2}/>
-      </LazyLoad>
+      {/* 基础写法 */}
+      <div className='text-base p-1 border border-black border-solid'>guang</div>
+      {/* hover的时候 */}
+      <div className='text-[14px] hover:text-[30px] hover:border-black hover:border bg-blue-500'>123</div>
+      {/* 响应式的时候 */}
+      <div className='bg-red-500 md:bg-blue-300 h-16'></div>
+      {/* 使用apply聚合样式 */}
+      <div className='btn-primary'>12</div>
+      {/* 使用自己开发的插件 */}
+      <div className='yuan'>3456</div>
     </div>
   );
 };
