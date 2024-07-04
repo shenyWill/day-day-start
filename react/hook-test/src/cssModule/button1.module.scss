@@ -1,0 +1,9 @@
+.btn-wrapper {
+  padding: 20px;
+  .btn {
+    color: red;
+  }
+}
+:global(.yellow) {
+  color: yellow;
+}
