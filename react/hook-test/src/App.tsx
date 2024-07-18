@@ -1,11 +1,34 @@
-import Button1 from './cssModule/button1';
-import Button2 from './cssModule/button2';
+import { useRef } from "react";
+import { MessageProvider, MessageRef } from "./Message";
+import { ConfigProvider } from "./Message/ConfigProvider";
+import { useMessage } from './Message/useMessage'
 
-export default function App() {
+function TestMessage() {
+  const message = useMessage();
+  return <button onClick={() => message.add({
+    content: '请求成功'
+  })}>点击</button>
+}
+
+function App() {
+  // const messageRef = useRef<MessageRef>(null);
+  // return (
+  //   <div>
+  //     <MessageProvider ref={messageRef}></MessageProvider>    
+  //     <button onClick={() => {
+  //       messageRef.current?.add({
+  //         content: '请求成功',
+  //       });
+  //     }}>点击</button>  
+  //   </div>
+  // );
   return (
-    <div>
-      <Button1></Button1>
-      <Button2></Button2>
-    </div>
-  );
-};
+    <ConfigProvider>
+      <div>
+        <TestMessage></TestMessage>
+      </div>
+    </ConfigProvider>
+  )
+}
+
+export default App;
