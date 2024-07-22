@@ -67,6 +67,7 @@
     "@storybook/test": "^8.0.0",
     "@types/react-lazyload": "^3.2.3",
     "@types/react-transition-group": "^4.4.10",
+    "click-to-react-component": "^1.1.0",
     "eslint-plugin-storybook": "^0.8.0",
     "prop-types": "^15.8.1",
     "react-lazyload": "^3.2.1",
