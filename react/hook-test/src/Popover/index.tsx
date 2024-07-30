@@ -59,7 +59,7 @@ export default function Popover(props: PopoverProps) {
 
   const dismiss = useDismiss(context);
 
-  console.log(trigger);
+  console.log(trigger, isOpen);
 
   const {getReferenceProps, getFloatingProps} = useInteractions([
     trigger === 'hover' ? interactionHover : interactionClick,
