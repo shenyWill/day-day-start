@@ -1,83 +1,40 @@
-import { OnBoarding } from './OnBoarding'
-import { Button, Flex } from 'antd';
+import React from 'react';
+import { UploadOutlined, InboxOutlined } from '@ant-design/icons';
+import { Button, message } from 'antd';
+import Upload, { UploadProps } from './Upload'
 
-function App() {
+const props: UploadProps = {
+  name: 'file',
+  action: 'http://localhost:3333/upload',
+  headers: {},
+  drag: true,
+  beforeUpload(file) {
+    if(file.name.includes('1.image')) {
+      return false;
+    }
+    return true;
+  },
+  onSuccess(ret) {
+    console.log('onSuccess', ret);
+  },
+  onError(err) {
+    console.log('onError', err);
+  },
+  onProgress(percentage, file) {
+    console.log('onProgress', percentage);
+  },
+  onChange(file) {
+    console.log('onChange', file);
+  }
+};
 
-  return <div className='App'>
-    <Flex gap="small" wrap="wrap" id="btn-group1">
-      <Button type="primary">Primary Button</Button>
-      <Button>Default Button</Button>
-      <Button type="dashed">Dashed Button</Button>
-      <Button type="text">Text Button</Button>
-      <Button type="link">Link Button</Button>
-    </Flex>
+const App: React.FC = () => (
+  <Upload {...props}>
+    <p>
+      <InboxOutlined style={{fontSize: '50px'}}/>
+    </p>
+    <p>点击或者拖拽文件到此处</p>
+  </Upload>
+);
 
-  <div style={{height: '1000px'}}></div>
-
-  <Flex wrap="wrap" gap="small">
-    <Button type="primary" danger>
-      Primary
-    </Button>
-    <Button danger>Default</Button>
-    <Button type="dashed" danger  id="btn-group2">
-      Dashed
-    </Button>
-    <Button type="text" danger>
-      Text
-    </Button>
-    <Button type="link" danger>
-      Link
-    </Button>
-  </Flex>
-
-  <div style={{height: '500px'}}></div>
-
-  <Flex wrap="wrap" gap="small">
-    <Button type="primary" ghost>
-      Primary
-    </Button>
-    <Button ghost>Default</Button>
-    <Button type="dashed" ghost>
-      Dashed
-    </Button>
-    <Button type="primary" danger ghost id="btn-group3">
-      Danger
-    </Button>
-  </Flex>
-
-  <OnBoarding
-      steps={
-        [
-          {
-            selector: () => {
-              return document.getElementById('btn-group1');
-            },
-            renderContent: () => {
-              return "赵子龙";
-            },
-            placement: 'bottom'
-          },
-          {
-            selector: () => {
-              return document.getElementById('btn-group2');
-            },
-            renderContent: () => {
-              return "张翼德";
-            },
-            placement: 'bottom'
-          },
-          {
-            selector: () => {
-              return document.getElementById('btn-group3');
-            },
-            renderContent: () => {
-              return "关云长";
-            },
-            placement: 'bottom'
-          }
-        ]
-      } />
-  </div>
-}
-
-export default App
+export default App;
