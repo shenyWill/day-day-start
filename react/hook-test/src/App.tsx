@@ -1,40 +1,53 @@
-import React from 'react';
-import { UploadOutlined, InboxOutlined } from '@ant-design/icons';
-import { Button, message } from 'antd';
-import Upload, { UploadProps } from './Upload'
+import { Button, Checkbox, Input } from "antd";
+import Form from "./Form/index";
 
-const props: UploadProps = {
-  name: 'file',
-  action: 'http://localhost:3333/upload',
-  headers: {},
-  drag: true,
-  beforeUpload(file) {
-    if(file.name.includes('1.image')) {
-      return false;
-    }
-    return true;
-  },
-  onSuccess(ret) {
-    console.log('onSuccess', ret);
-  },
-  onError(err) {
-    console.log('onError', err);
-  },
-  onProgress(percentage, file) {
-    console.log('onProgress', percentage);
-  },
-  onChange(file) {
-    console.log('onChange', file);
-  }
+const Basic: React.FC = () => {
+  const onFinish = (values: any) => {
+    console.log('Success:', values);
+  };
+
+  const onFinishFailed = (errorInfo: any) => {
+    console.log('Failed:', errorInfo);
+  };
+
+  return (
+    <Form
+      initialValues={{ remember: true, username: '神说要有光' }}
+      onFinish={onFinish}
+      onFinishFailed={onFinishFailed}
+    >
+      <Form.Item
+        label="Username"
+        name="username"
+        rules={[
+          { required: true, message: '请输入用户名!' },
+          { max: 6, message: '长度不能大于 6' }
+        ]}
+      >
+        <Input />
+      </Form.Item>
+
+      <Form.Item
+        label="Password"
+        name="password"
+        rules={[{ required: true, message: '请输入密码!' }]}
+      >
+        <Input.TextArea />
+      </Form.Item>
+
+      <Form.Item name="remember" valuePropName="checked">
+        <Checkbox>记住我</Checkbox>
+      </Form.Item>
+
+      <Form.Item>
+        <div>
+          <Button type="primary" htmlType="submit" >
+            登录
+          </Button>
+        </div>
+      </Form.Item>
+    </Form>
+  );
 };
 
-const App: React.FC = () => (
-  <Upload {...props}>
-    <p>
-      <InboxOutlined style={{fontSize: '50px'}}/>
-    </p>
-    <p>点击或者拖拽文件到此处</p>
-  </Upload>
-);
-
-export default App;
+export default Basic;
