@@ -28,7 +28,13 @@ function SelectedMask({
 
   useEffect(() => {
     updatePosition();
-  }, [componentId, components]);
+  }, [componentId]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      updatePosition();
+    }, 200);
+  }, [components]);
 
   useEffect(() => {
     const handleResize = () => {
