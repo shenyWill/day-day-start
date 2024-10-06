@@ -1,7 +1,10 @@
 import { create } from "zustand";
-import Container from "../materials/container";
-import Button from "../materials/button";
-import Page from "../materials/page";
+import ContainerDev from "../materials/container/dev";
+import ContainerPre from "../materials/container/preview";
+import ButtonDev from "../materials/button/dev";
+import ButtonPre from "../materials/button/preview";
+import PageDev from "../materials/page/dev";
+import PagePre from "../materials/page/preview";
 
 
 export interface ComponentSetter {
@@ -17,7 +20,8 @@ export interface ComponentConfig {
   defaultProps: Record<string, any>;
   setter?: ComponentSetter[];
   stylesSetter?: ComponentSetter[];
-  component: any;
+  dev: any;
+  preview: any;
 }
 
 interface State {
@@ -34,7 +38,8 @@ export const useComponentConfigStore = create<State & Action>((set) => ({
       name: "Container",
       defaultProps: {},
       desc: '容器',
-      component: Container,
+      dev: ContainerDev,
+      preview: ContainerPre,
     },
     Button: {
       name: "Button",
@@ -77,13 +82,15 @@ export const useComponentConfigStore = create<State & Action>((set) => ({
         },
       ],
       desc: '按钮',
-      component: Button,
+      dev: ButtonDev,
+      preview: ButtonPre,
     },
     Page: {
       name: "Page",
       desc: "页面",
       defaultProps: {},
-      component: Page,
+      dev: PageDev,
+      preview: PagePre,
     },
   },
   registerComponent: (name, componentConfig) =>
