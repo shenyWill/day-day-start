@@ -51,7 +51,7 @@ export function SetStyle() {
     return str;
   }
 
-  const formatCssValue = value => {
+  const formatCssValue = (value: any) => {
     let css: Record<string, any> = {};
     try {
       const cssStr = value
