@@ -2,6 +2,8 @@ import { message } from "antd";
 import React, { MouseEventHandler, useEffect, useState } from "react";
 import { useComponentConfigStore } from "../../stores/component-config";
 import { Component, useComponetsStore } from "../../stores/components";
+import { GoToLinkConfig } from "../SettingComponent/events/GoToLink";
+import { ShowMessageConfig } from "../SettingComponent/events/showMessage";
 
 export function Preview() {
   const { components } = useComponetsStore();
@@ -12,17 +14,19 @@ export function Preview() {
     componentConfig[component.name].events?.forEach(event => {
       const eventConfig = component.props?.[event.name];
       if (eventConfig) {
-        const { type } = eventConfig;
         props[event.name] = () => {
-          if (type === "goToLink" && eventConfig.url) {
-            window.location.href = eventConfig.url;
-          } else if (type === "showMessage" && eventConfig.config) {
-            if (eventConfig.config.type === "success") {
-              message.success(eventConfig.config.text);
-            } else if (eventConfig.config.type === "error") {
-              message.error(eventConfig.config.text);
+          eventConfig?.actions?.forEach((action: GoToLinkConfig | ShowMessageConfig) => {
+            const { type } = action;
+            if (type === "goToLink" && action.url) {
+              window.open(action.url);
+            } else if (type === "showMessage" && action.config) {
+              if (action.config.type === "success") {
+                message.success(action.config.text);
+              } else if (action.config.type === "error") {
+                message.error(action.config.text);
+              }
             }
-          }
+          })
         }
       }
     });
