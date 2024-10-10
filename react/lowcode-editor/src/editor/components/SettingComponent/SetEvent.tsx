@@ -4,32 +4,56 @@ import { ComponentEvent, useComponentConfigStore } from "../../stores/component-
 import { GoToLink, GoToLinkConfig } from "./events/GoToLink";
 import React, { useState } from "react";
 import { ShowMessage, ShowMessageConfig } from "./events/showMessage";
-import { EventModal } from "./eventModal";
-import { DeleteOutlined } from "@ant-design/icons";
+import { EventConfig, EventModal } from "./eventModal";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 
 export function SetEvent() {
   const { curComponent, updateComponentProps, curComponentId } = useComponetsStore();
   const { componentConfig } = useComponentConfigStore();
   const [eventModalOpen, setEventModalOpen] = useState(false);
   const [curEvent, setCurEvent] = useState<ComponentEvent>();
+  const [curAction, setCurAction] = useState<EventConfig>();
+  const [curActionIndex, setCurActionIndex] = useState<number>();
 
   if (!curComponent) return null;
 
-  const handleChange = (eventName: string, value: string) => {
-    if (!curComponentId) return;
-    updateComponentProps(curComponentId, { [eventName]: { type: value } });
-  }
-
-  const handleEventOk = (config?: GoToLinkConfig | ShowMessageConfig) => {
+  const handleEventOk = (config?: EventConfig) => {
+    console.log(22222, curComponentId, config, curEvent);
     if (!curComponentId || !config || !curEvent) return;
-    updateComponentProps(curComponentId, { [curEvent.name]: {
-      actions: [
-        ...(curComponent.props[curEvent.name]?.actions || []),
-        config,
-      ]
-    } });
+    if (curAction) {
+      updateComponentProps(curComponentId, {
+        [curEvent.name]: {
+          actions: curComponent.props[curEvent.name]?.actions.map((item: EventConfig, index: number) => {
+            if (index === curActionIndex) {
+              return config;
+            }
+            return item;
+          }),
+        }
+      })
+    } else {
+      updateComponentProps(curComponentId, {
+        [curEvent.name]: {
+          actions: [
+            ...(curComponent.props[curEvent.name]?.actions || []),
+            config,
+          ],
+        },
+      });
+    }
+    setCurAction(undefined);
+    console.log(123);
     setEventModalOpen(false);
-  }
+  };
+
+  const handleEditEvent = (config: EventConfig, index: number) => {
+    if (!curComponent) {
+      return;
+    }
+    setCurAction(config);
+    setCurActionIndex(index);
+    setEventModalOpen(true);
+  };
 
   const handleDeleteEvent = (event: ComponentEvent, index: number) => {
     if (!curComponent) {
@@ -70,13 +94,30 @@ export function SetEvent() {
       children: (
         <div>
           {(curComponent.props[event.name]?.actions || []).map(
-            (item: GoToLinkConfig | ShowMessageConfig, index: number) => {
+            (item: EventConfig, index: number) => {
               return (
                 <div key={index}>
                   {item.type === "goToLink" ? (
-                    <div className="border border-[#aaa] m-[10px] p-[10px] relative">
+                    <div
+                      key="goToLink"
+                      className="border border-[#aaa] m-[10px] p-[10px] relative"
+                    >
                       <div className="text-[blue]">跳转链接</div>
                       <div>{item.url}</div>
+                      <div
+                        style={{
+                          position: "absolute",
+                          top: 10,
+                          right: 30,
+                          cursor: "pointer",
+                        }}
+                        onClick={() => {
+                          setCurEvent(event);
+                          handleEditEvent(item, index);
+                        }}
+                      >
+                        <EditOutlined />
+                      </div>
                       <div
                         style={{
                           position: "absolute",
@@ -91,10 +132,60 @@ export function SetEvent() {
                     </div>
                   ) : null}
                   {item.type === "showMessage" ? (
-                    <div className="border border-[#aaa] m-[10px] p-[10px] relative">
+                    <div
+                      key="showMessage"
+                      className="border border-[#aaa] m-[10px] p-[10px] relative"
+                    >
                       <div className="text-[blue]">消息弹窗</div>
                       <div>{item.config.type}</div>
                       <div>{item.config.text}</div>
+                      <div
+                        style={{
+                          position: "absolute",
+                          top: 10,
+                          right: 30,
+                          cursor: "pointer",
+                        }}
+                        onClick={() => {
+                          setCurEvent(event);
+                          handleEditEvent(item, index);
+                        }}
+                      >
+                        <EditOutlined />
+                      </div>
+                      <div
+                        style={{
+                          position: "absolute",
+                          top: 10,
+                          right: 10,
+                          cursor: "pointer",
+                        }}
+                        onClick={() => handleDeleteEvent(event, index)}
+                      >
+                        <DeleteOutlined />
+                      </div>
+                    </div>
+                  ) : null}
+                  {item.type === "customJs" ? (
+                    <div
+                      key="customJs"
+                      className="border border-[#aaa] m-[10px] p-[10px] relative"
+                    >
+                      <div className="text-[blue]">自定义 JS</div>
+                      <div
+                        style={{
+                          position: "absolute",
+                          top: 10,
+                          right: 30,
+                          cursor: "pointer",
+                        }}
+                        onClick={() => {
+                          setCurEvent(event);
+                          handleEditEvent(item, index);
+                        }}
+                      >
+                        <EditOutlined />
+                      </div>
                       <div
                         style={{
                           position: "absolute",
@@ -128,7 +219,7 @@ export function SetEvent() {
       />
       <EventModal
         visible={eventModalOpen}
-        eventConfig={curEvent!}
+        event={curAction}
         handleOk={handleEventOk}
         handleCancel={() => {
           setEventModalOpen(false);
