@@ -2,6 +2,7 @@ import { message } from "antd";
 import React, { MouseEventHandler, useEffect, useState } from "react";
 import { useComponentConfigStore } from "../../stores/component-config";
 import { Component, useComponetsStore } from "../../stores/components";
+import { EventConfig } from "../SettingComponent/eventModal";
 import { GoToLinkConfig } from "../SettingComponent/events/GoToLink";
 import { ShowMessageConfig } from "../SettingComponent/events/showMessage";
 
@@ -15,7 +16,7 @@ export function Preview() {
       const eventConfig = component.props?.[event.name];
       if (eventConfig) {
         props[event.name] = () => {
-          eventConfig?.actions?.forEach((action: GoToLinkConfig | ShowMessageConfig) => {
+          eventConfig?.actions?.forEach((action: EventConfig) => {
             const { type } = action;
             if (type === "goToLink" && action.url) {
               window.open(action.url);
@@ -24,6 +25,22 @@ export function Preview() {
                 message.success(action.config.text);
               } else if (action.config.type === "error") {
                 message.error(action.config.text);
+              }
+            } else if (type === 'customJs' && action.code) {
+              try {
+                const fn = new Function('context', action.code);
+                fn({
+                  name: component.name,
+                  props: component.props,
+                  showMessage: (text: string) => {
+                    message.success(text);
+                  },
+                  showError: (text: string) => {
+                    message.error(text);
+                  },
+                });
+              } catch (error) {
+                console.error(error);
               }
             }
           })
