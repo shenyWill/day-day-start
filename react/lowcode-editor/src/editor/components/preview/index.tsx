@@ -1,5 +1,5 @@
 import { message } from "antd";
-import React, { MouseEventHandler, useEffect, useState } from "react";
+import React, { MouseEventHandler, useEffect, useRef, useState } from "react";
 import { useComponentConfigStore } from "../../stores/component-config";
 import { Component, useComponetsStore } from "../../stores/components";
 import { EventConfig } from "../SettingComponent/eventModal";
@@ -9,6 +9,8 @@ import { ShowMessageConfig } from "../SettingComponent/events/showMessage";
 export function Preview() {
   const { components } = useComponetsStore();
   const { componentConfig } = useComponentConfigStore();
+  const componentRefs = useRef<Record<string, any>>({});
+
 
   function handleEvent(component: Component) {
     const props: Record<string, any> = {};
@@ -26,9 +28,9 @@ export function Preview() {
               } else if (action.config.type === "error") {
                 message.error(action.config.text);
               }
-            } else if (type === 'customJs' && action.code) {
+            } else if (type === "customJs" && action.code) {
               try {
-                const fn = new Function('context', action.code);
+                const fn = new Function("context", action.code);
                 fn({
                   name: component.name,
                   props: component.props,
@@ -42,7 +44,14 @@ export function Preview() {
               } catch (error) {
                 console.error(error);
               }
+            } else if (action.type === "componentMethod") {
+              const component =
+                componentRefs.current[action.config.componentId];
+              if (component) {
+                component[action.config.method]?.();
+              }
             }
+
           })
         }
       }
@@ -65,6 +74,9 @@ export function Preview() {
           id: component.id,
           name: component.name,
           styles: component.styles,
+          ref: (ref: Record<string, any>) => {
+            componentRefs.current[component.id] = ref;
+          },
           ...config.defaultProps,
           ...component.props,
           ...handleEvent(component),
