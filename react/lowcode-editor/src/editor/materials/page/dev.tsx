@@ -3,7 +3,7 @@ import { useMaterailDrop } from "../../hooks/useMaterialDrop";
 import { CommonComponentProps } from "../../interface";
 
 function Page({ id, name, styles, children }: CommonComponentProps) {
-  const { canDrop, drop } = useMaterailDrop(["Button", "Container"], id);
+  const { canDrop, drop } = useMaterailDrop(["Button", "Container", "Modal"], id);
   return (
     <div
       data-component-id={id}

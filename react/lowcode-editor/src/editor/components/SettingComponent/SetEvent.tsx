@@ -1,5 +1,5 @@
 import { Collapse, Input, Select, CollapseProps, Button } from "antd";
-import { useComponetsStore } from "../../stores/components";
+import { useComponetsStore, getComponentById } from "../../stores/components";
 import { ComponentEvent, useComponentConfigStore } from "../../stores/component-config";
 import { GoToLink, GoToLinkConfig } from "./events/GoToLink";
 import React, { useState } from "react";
@@ -8,7 +8,7 @@ import { EventConfig, EventModal } from "./eventModal";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 
 export function SetEvent() {
-  const { curComponent, updateComponentProps, curComponentId } = useComponetsStore();
+  const { curComponent, updateComponentProps, curComponentId, components } = useComponetsStore();
   const { componentConfig } = useComponentConfigStore();
   const [eventModalOpen, setEventModalOpen] = useState(false);
   const [curEvent, setCurEvent] = useState<ComponentEvent>();
@@ -183,6 +183,44 @@ export function SetEvent() {
                           setCurEvent(event);
                           handleEditEvent(item, index);
                         }}
+                      >
+                        <EditOutlined />
+                      </div>
+                      <div
+                        style={{
+                          position: "absolute",
+                          top: 10,
+                          right: 10,
+                          cursor: "pointer",
+                        }}
+                        onClick={() => handleDeleteEvent(event, index)}
+                      >
+                        <DeleteOutlined />
+                      </div>
+                    </div>
+                  ) : null}
+                  {item.type === "componentMethod" ? (
+                    <div
+                      key="componentMethod"
+                      className="border border-[#aaa] m-[10px] p-[10px] relative"
+                    >
+                      <div className="text-[blue]">组件方法</div>
+                      <div>
+                        {
+                          getComponentById(item.config.componentId, components)
+                            ?.desc
+                        }
+                      </div>
+                      <div>{item.config.componentId}</div>
+                      <div>{item.config.method}</div>
+                      <div
+                        style={{
+                          position: "absolute",
+                          top: 10,
+                          right: 30,
+                          cursor: "pointer",
+                        }}
+                        onClick={() => handleEditEvent(item, index)}
                       >
                         <EditOutlined />
                       </div>
