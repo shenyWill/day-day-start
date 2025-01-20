@@ -2,7 +2,7 @@
 import MonthCalendar from './MonthCalendar';
 import { Dayjs } from 'dayjs';
 import Header from './Header';
-import { CSSProperties, ReactNode } from 'react';
+import React, { CSSProperties, ReactNode } from 'react';
 import cs from 'classnames';
 
 export interface CalendarProps {
