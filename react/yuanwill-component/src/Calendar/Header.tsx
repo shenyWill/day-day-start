@@ -1,3 +1,4 @@
+import React from 'react';
 function Header() {
   return <div className="calendar-header">
         <div className="calendar-header-left">
