@@ -4,12 +4,13 @@
   // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
+
     {
-      "type": "chrome",
+      "type": "node",
       "request": "launch",
-      "name": "针对 localhost 启动 Chrome",
-      "url": "http://localhost:3000",
-      "webRoot": "${workspaceFolder}"
+      "name": "针对 test.js进行调试",
+      "console": "integratedTerminal",
+      "program": "${workspaceFolder}/node/cli-dashboard-test/test.js"
     }
   ]
 }
