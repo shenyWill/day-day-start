@@ -5,6 +5,41 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Launch Program 的测试test.js",
+      "program": "${workspaceFolder}/node/node-debug/test.js",
+      "request": "launch",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "envFile": "${workspaceFolder}/node/node-debug/.env",
+      "env": {
+        "name": "zhaozilong",
+      },
+      "args": [
+        "zhangsan",
+        "lisi"
+      ],
+      "type": "node"
+    },
+    {
+      "name": "Attach by Process ID",
+      "processId": "${command:PickProcess}",
+      "request": "attach",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "type": "node"
+    },
+    {
+      "name": "Attach",
+      "port": 9229,
+      "request": "attach",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "type": "node"
+    },
+    {
       "name": "Launch Program",
       "program": "${workspaceFolder}/node/node-debug/index.js",
       "request": "launch",
