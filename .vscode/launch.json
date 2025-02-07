@@ -5,6 +5,16 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Launch Program my-source-map-support",
+      "program": "${workspaceFolder}/node/my-source-map-support/src/index.ts",
+      "request": "launch",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "console": "integratedTerminal",
+      "type": "node"
+    },
+    {
       "name": "Launch Program 调用ts-debug index.ts",
       "program": "${workspaceFolder}/node/ts-debug/src/index.ts",
       "request": "launch",
