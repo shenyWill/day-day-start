@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
 import chalk from "chalk";
-import { add, minus } from '@yuan-yarn/core';
+import { add, minus, devide } from '@yuan-yarn/core';
 const program = new Command();
 program
     .name('num-cli')
@@ -20,5 +20,12 @@ program.command('minus')
     .argument('b', '第二个数字')
     .action((a, b) => {
     console.log(chalk.cyan(minus(+a, +b)));
+});
+program.command('devide')
+    .description('除法')
+    .argument('a', '第一个数字')
+    .argument('b', '第二个数字')
+    .action((a, b) => {
+    console.log(chalk.cyan(devide(+a, +b)));
 });
 program.parse();

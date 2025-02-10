@@ -4,4 +4,7 @@ function add(a, b) {
 function minus(a, b) {
     return a - b;
 }
-export { add, minus };
+function devide(a, b) {
+    return a / b;
+}
+export { add, minus, devide };
