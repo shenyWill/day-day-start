@@ -1,0 +1,25 @@
+{
+  "name": "@yuan-pnpm/cli",
+  "version": "1.1.1",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "type": "module",
+  "bin": {
+    "num-cli": "./dist/index.js"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@yuan-pnpm/core": "^1.1.0",
+    "chalk": "^5.4.1",
+    "commander": "^13.1.0"
+  }
+}
