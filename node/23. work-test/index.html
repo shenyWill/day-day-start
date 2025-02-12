@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>worker performance optimization</title>
+</head>
+<body>
+    <script>
+        function calc() {
+            let total = 0;
+            for(let i = 0; i< 10*10000*10000; i++) {
+                total += i;
+            }
+            return total
+        }
+
+        document.write(calc());
+    </script>
+</body>
+</html>
