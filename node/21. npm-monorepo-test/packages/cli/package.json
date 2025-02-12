@@ -1,0 +1,22 @@
+{
+  "name": "@yuan-npm/cli",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "bin": {
+    "npm-calc": "dist/index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@yuan-npm/core": "^1.0.0",
+    "chalk": "^5.4.1",
+    "commander": "^13.1.0"
+  }
+}
