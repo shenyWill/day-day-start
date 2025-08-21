@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://unpkg.com/axios@0.24.0/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/qs@6.10.2/dist/qs.js"></script>
+</head>
+<body>
+    <input id="fileInput" type="file" multiple/>
+    <button id="uploadBtn">上传</button>
+    <script>
+        async function urlParam() {
+            const res = await axios.get('/api/person/1');
+            console.log(res);            
+        }
+        async function queryParam() {
+            const res = await axios.get('/api/person/find', {
+                params: {
+                    name: '张三',
+                    age: 18
+                }
+            });
+            console.log(res);            
+        }
+        async function formUrlEncoded() {
+            const res = await axios.post('/api/person', Qs.stringify({
+                name: '张三',
+                age: 18
+            }), {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            });
+            console.log(res);            
+        }
+        async function json() {
+            const res = await axios.post('/api/person', {
+                name: '李四',
+                age: 19
+            }, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            console.log(res);            
+        }
+
+        async function uploadFile() {
+            const fileInput = document.getElementById('fileInput');
+            const files = fileInput.files;
+            const formData = new FormData();
+            for (let i = 0; i < files.length; i++) {
+                formData.append('files', files[i]);
+            }
+            formData.append('name', '王五');
+            formData.append('age', 20);
+            const res = await axios.post('/api/person/file', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+            console.log(res);            
+        }
+        document.getElementById('uploadBtn').addEventListener('click', uploadFile);
+
+        // urlParam();
+        // queryParam();
+        // formUrlEncoded();
+        json();
+   </script>
+</body>
