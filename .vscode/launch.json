@@ -5,76 +5,38 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Launch Program my-source-map-support",
-      "program": "${workspaceFolder}/node/my-source-map-support/src/index.ts",
+      "name": "调试nest程序不用输入debug命令",
       "request": "launch",
+      "runtimeArgs": [
+        "run",
+        "start:dev"
+      ],
+      "runtimeExecutable": "npm",
       "skipFiles": [
         "<node_internals>/**"
       ],
-      "console": "integratedTerminal",
-      "type": "node"
+      "cwd": "${workspaceFolder}/nest/debug-test/nest-debug",
+      "type": "node",
+      "console": "integratedTerminal"
     },
     {
-      "name": "Launch Program 调用ts-debug index.ts",
-      "program": "${workspaceFolder}/node/ts-debug/src/index.ts",
+      "name": "调试index.js文件来测试一下",
+      "program": "${workspaceFolder}/nest/debug-test/index.js",
       "request": "launch",
-      "skipFiles": [
-        "<node_internals>/**"
-      ],
-      "console": "integratedTerminal",
-      "type": "node"
-    },
-    {
-      "name": "Launch Program 的测试test.js",
-      "program": "${workspaceFolder}/node/node-debug/test.js",
-      "request": "launch",
-      "skipFiles": [
-        "<node_internals>/**"
-      ],
-      "envFile": "${workspaceFolder}/node/node-debug/.env",
-      "env": {
-        "name": "zhaozilong",
-      },
-      "args": [
-        "zhangsan",
-        "lisi"
-      ],
-      "type": "node"
-    },
-    {
-      "name": "Attach by Process ID",
-      "processId": "${command:PickProcess}",
-      "request": "attach",
+      "stopOnEntry": true,
       "skipFiles": [
         "<node_internals>/**"
       ],
       "type": "node"
     },
     {
-      "name": "Attach",
+      "name": "调试nest程序",
       "port": 9229,
       "request": "attach",
       "skipFiles": [
         "<node_internals>/**"
       ],
       "type": "node"
-    },
-    {
-      "name": "Launch Program",
-      "program": "${workspaceFolder}/node/node-debug/index.js",
-      "request": "launch",
-      "skipFiles": [
-        "<node_internals>/**"
-      ],
-      "stopOnEntry": true,
-      "type": "node"
-    },
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "针对 test.js进行调试",
-      "console": "integratedTerminal",
-      "program": "${workspaceFolder}/node/cli-dashboard-test/test.js"
     }
   ]
 }
