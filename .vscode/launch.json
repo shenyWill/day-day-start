@@ -15,7 +15,7 @@
       "skipFiles": [
         "<node_internals>/**"
       ],
-      "cwd": "${workspaceFolder}/nest/custom-provider",
+      "cwd": "${workspaceFolder}/nest/argument-host",
       "type": "node",
       "console": "integratedTerminal"
     },
