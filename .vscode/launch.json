@@ -15,7 +15,7 @@
       "skipFiles": [
         "<node_internals>/**"
       ],
-      "cwd": "${workspaceFolder}/nest/argument-host",
+      "cwd": "${workspaceFolder}/nest/dynamic-module",
       "type": "node",
       "console": "integratedTerminal"
     },
