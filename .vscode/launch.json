@@ -15,7 +15,7 @@
       "skipFiles": [
         "<node_internals>/**"
       ],
-      "cwd": "${workspaceFolder}/nest/dynamic-module",
+      "cwd": "${workspaceFolder}/nest/exception-filter-test",
       "type": "node",
       "console": "integratedTerminal"
     },
