@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/axios@0.24.0/dist/axios.min.js"></script>
+</head>
+<body>
+    <input id="fileInput" type="file" multiple/>
+    <script>
+        const fileInput = document.querySelector('#fileInput');
+
+        async function formData() {
+            const data = new FormData();
+            data.set('name','yuanwill');
+            data.set('age', 30);
+            data.set('file', fileInput.files[0]);
+
+            const res = await axios.post('http://localhost:3000/upload', data);
+            console.log(res);
+        }
+
+        async function formDatas(params) {
+            const data = new FormData();
+            data.set('name','yuanwill');
+            data.set('age', 30);
+            [...fileInput.files].forEach((file) => {
+                data.append('files', file);
+            })
+            const res = await axios.post('http://localhost:3000/uploads', data);
+            console.log(res);
+        }
+        
+        async function formManyDatas(params) {
+            const data = new FormData();
+            data.set('name','yuanwill');
+            data.set('age', 30);
+            data.append('image-file', fileInput.files[0]);
+            data.append('image-file', fileInput.files[1]);
+            data.append('png-file', fileInput.files[2]);
+            data.append('png-file', fileInput.files[3]);
+            data.append('png-file', fileInput.files[4]);
+            const res = await axios.post('http://localhost:3000/upload-many', data);
+            console.log(res);
+        }
+
+        async function formAnyDatas(params) {
+            const data = new FormData();
+            data.set('name','yuanwill');
+            data.set('age', 30);
+            [...fileInput.files].forEach((file) => {
+                data.append('files', file);
+            })
+            const res = await axios.post('http://localhost:3000/upload-any', data);
+            console.log(res);
+        }
+
+        fileInput.onchange = formAnyDatas;
+    </script>
+</body>
+</html>
