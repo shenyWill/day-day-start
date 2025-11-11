@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="startBtn">录制</div>
+  <div id="stopBtn">停止</div>
+</body>
+<script>
+  // 检查浏览器支持
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+    console.error('浏览器不支持麦克风访问');
+  }
+
+  async function startAudioRecording() {
+    try {
+      // 检查权限状态
+      const permission = await navigator.permissions.query({ name: 'microphone' });
+      console.log('麦克风权限状态:', permission.state);
+
+      // 请求音频流
+      const stream = await navigator.mediaDevices.getUserMedia({
+        audio: {
+          echoCancellation: true,  // 启用回声消除
+          noiseSuppression: true, // 启用噪声抑制
+          sampleRate: 44100       // 设置采样率
+        }
+      });
+
+      // 创建录制器
+      const mediaRecorder = new MediaRecorder(stream, {
+        mimeType: 'audio/webm;codecs=opus'
+      });
+
+      let audioChunks = [];
+
+      mediaRecorder.ondataavailable = (event) => {
+        if (event.data.size > 0) {
+          audioChunks.push(event.data);
+        }
+      };
+
+      mediaRecorder.onstop = () => {
+        const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+        const audioUrl = URL.createObjectURL(audioBlob);
+
+        // 可以播放、下载或上传音频数据
+        console.log('录音完成，可以处理音频数据:', audioUrl);
+
+        // 播放录音
+        playRecordedAudio(audioUrl);
+
+        // 释放资源
+        stream.getTracks().forEach(track => track.stop());
+      };
+
+      // 开始录制
+      mediaRecorder.start();
+      console.log('开始录音');
+
+      return { mediaRecorder, stream };
+
+    } catch (err) {
+      console.error('麦克风访问失败:', err.message);
+      throw err;
+    }
+  }
+
+  // 播放录音函数
+  function playRecordedAudio(audioUrl) {
+    // 检查是否已存在音频元素，如果存在则移除
+    const existingAudio = document.getElementById('recordedAudio');
+    if (existingAudio) {
+      existingAudio.remove();
+    }
+
+    // 创建新的音频元素
+    const audioElement = document.createElement('audio');
+    audioElement.id = 'recordedAudio';
+    audioElement.src = audioUrl;
+    audioElement.controls = true; // 显示控制条
+    audioElement.autoplay = true; // 自动播放（需要用户交互后才能正常工作）
+
+    // 添加到页面中
+    document.body.appendChild(audioElement);
+
+    // 监听播放完成事件，释放URL对象避免内存泄漏
+    audioElement.onended = () => {
+      console.log('播放完成');
+      // 注意：这里不调用URL.revokeObjectURL(audioUrl)，因为如果用户想再次播放就无法使用了
+      // 如果确定不再需要，可以在这里调用
+    };
+
+    // 处理播放错误
+    audioElement.onerror = (error) => {
+      console.error('音频播放失败:', error);
+    };
+  }
+
+  // 使用示例
+  let recordingInstance = null;
+
+  document.getElementById('startBtn').addEventListener('click', async () => {
+    try {
+      recordingInstance = await startAudioRecording();
+    } catch (err) {
+      alert('无法开始录音: ' + err.message);
+    }
+  });
+
+  document.getElementById('stopBtn').addEventListener('click', () => {
+    if (recordingInstance && recordingInstance.mediaRecorder) {
+      recordingInstance.mediaRecorder.stop();
+      console.log('录音已停止');
+    }
+  });
+</script>
+
+</html>

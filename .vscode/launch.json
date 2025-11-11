@@ -15,7 +15,7 @@
       "skipFiles": [
         "<node_internals>/**"
       ],
-      "cwd": "${workspaceFolder}/nest/nest-multer-upload",
+      "cwd": "${workspaceFolder}/nest/book-management-system-backend",
       "type": "node",
       "console": "integratedTerminal"
     },
