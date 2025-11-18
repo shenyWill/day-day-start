@@ -1,9 +1,10 @@
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { DbService } from 'src/db/db.service';
+import { User } from './entities/user.entity';
+import { RegisterUserDto } from './dto/register-user.dto';
+import { LoginUserDto } from './dto/login-user.dto';
 export declare class UserService {
-    create(createUserDto: CreateUserDto): string;
-    findAll(): string;
-    findOne(id: number): string;
-    update(id: number, updateUserDto: UpdateUserDto): string;
-    remove(id: number): string;
+    private readonly dbService;
+    constructor(dbService: DbService);
+    register(createUserDto: RegisterUserDto): Promise<User>;
+    login(loginUserDto: LoginUserDto): Promise<User>;
 }
