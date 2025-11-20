@@ -6,21 +6,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AppModule = void 0;
+exports.BookModule = void 0;
 const common_1 = require("@nestjs/common");
-const app_controller_1 = require("./app.controller");
-const app_service_1 = require("./app.service");
-const user_module_1 = require("./user/user.module");
-const db_module_1 = require("./db/db.module");
-const book_module_1 = require("./book/book.module");
-let AppModule = class AppModule {
+const book_service_1 = require("./book.service");
+const book_controller_1 = require("./book.controller");
+const db_module_1 = require("../db/db.module");
+let BookModule = class BookModule {
 };
-exports.AppModule = AppModule;
-exports.AppModule = AppModule = __decorate([
+exports.BookModule = BookModule;
+exports.BookModule = BookModule = __decorate([
     (0, common_1.Module)({
-        imports: [user_module_1.UserModule, db_module_1.DbModule, book_module_1.BookModule],
-        controllers: [app_controller_1.AppController],
-        providers: [app_service_1.AppService],
+        imports: [
+            db_module_1.DbModule.register({
+                path: 'book.json',
+            }),
+        ],
+        controllers: [book_controller_1.BookController],
+        providers: [book_service_1.BookService],
     })
-], AppModule);
-//# sourceMappingURL=app.module.js.map
+], BookModule);
+//# sourceMappingURL=book.module.js.map
