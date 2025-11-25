@@ -7,6 +7,11 @@ const path_1 = require("path");
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
     app.useGlobalPipes(new common_1.ValidationPipe({ transform: true }));
+    app.enableCors({
+        origin: 'http://localhost:5173',
+        methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+        credentials: true,
+    });
     app.useStaticAssets((0, path_1.join)(__dirname, '../uploads'), {
         prefix: '/uploads',
     });
