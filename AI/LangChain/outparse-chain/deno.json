@@ -1,0 +1,8 @@
+{
+    "imports": {
+        "@langchain": "npm:/@langchain",
+        "@langchain/community/": "npm:/@langchain/community@0.0.26/",
+        "langchain": "npm:/langchain@0.0.153/",
+        "zod": "npm:/zod"
+    }
+}
