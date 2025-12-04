@@ -1,0 +1,7 @@
+{
+    "imports": {
+        "@langchain/community/": "npm:/@langchain/community@1.0.6/",
+        "langchain/": "npm:/langchain@0.0.153/",
+        "pdf-parse": "npm:/pdf-parse@1.1.1"
+    }
+}
