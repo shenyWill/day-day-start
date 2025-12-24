@@ -1,0 +1,11 @@
+{
+  "extends": "@gulux/style/lib",
+  "compilerOptions": {
+    "outDir": "output"
+  },
+  "exclude": ["./*.json", "./*.md"],
+  "include": ["./**/*"],
+  "ts-node": {
+    "files": true
+  }
+}
