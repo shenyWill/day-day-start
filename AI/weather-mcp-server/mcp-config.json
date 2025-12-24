@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "current-weather-mcp-server": {
+      "command": "node",
+      "args": [
+        "/Users/bytedance/Desktop/study-code/day-day-start/AI/weather-mcp-server/src/index.js"
+      ],
+      "cwd": "/Users/bytedance/Desktop/study-code/day-day-start/AI/weather-mcp-server"
+    }
+  }
+}
